@@ -93,17 +93,17 @@ class SwitchMatrix
          * Attach a callback function to run when any button is pressed.
          * @param func CallbackFunction Function (void) to assign to trigger.
          */
-        void attachGlobalPressCallbackEvent(CallbackFunction func);
+        void attachGlobalPressCallbackEvent(CoordinatedCallbackFunction func);
         /**
          * Attach a callback function to run continously when any button is held.
          * @param func CallbackFunction Function (void) to assign to trigger.
          */
-        void attachGlobalHeldCallbackEvent(CallbackFunction func);
+        void attachGlobalHeldCallbackEvent(CoordinatedCallbackFunction func);
         /**
          * Attach a callback function to run when any button is released.
          * @param func CallbackFunction Function (void) to assign to trigger.
          */
-        void attachGlobalReleaseCallbackEvent(CallbackFunction func);
+        void attachGlobalReleaseCallbackEvent(CoordinatedCallbackFunction func);
         /**
          * Set whether the matrix should be polling buttons
          * @param t bool Target
@@ -168,9 +168,9 @@ class SwitchMatrix
         std::vector<std::vector<CallbackFunction>> _callbackPressFunctions;
         std::vector<std::vector<CallbackFunction>> _callbackReleaseFunctions;
         std::vector<std::vector<CallbackFunction>> _callbackHeldFunctions;
-        PointeredCallbackFunction _gCallbackPressFunction = nullptr;
-        PointeredCallbackFunction _gCallbackHeldFunction = nullptr;
-        PointeredCallbackFunction _gCallbackReleaseFunction = nullptr;
+        CoordinatedCallbackFunction _gCallbackPressFunction = nullptr;
+        CoordinatedCallbackFunction _gCallbackHeldFunction = nullptr;
+        CoordinatedCallbackFunction _gCallbackReleaseFunction = nullptr;
         bool _enabled = true;
 };
 

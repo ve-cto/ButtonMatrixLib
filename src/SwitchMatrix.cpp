@@ -167,15 +167,15 @@ void SwitchMatrix::attachReleaseCallbackEvent(uint row, uint col, CallbackFuncti
     _callbackReleaseFunctions[row][col] = func;
 }
 
-void SwitchMatrix::attachGlobalPressCallbackEvent(CallbackFunction func) {
+void SwitchMatrix::attachGlobalPressCallbackEvent(CoordinatedCallbackFunction func) {
     _gCallbackPressFunction = func;
 }
 
-void SwitchMatrix::attachGlobalHeldCallbackEvent(CallbackFunction func) {
+void SwitchMatrix::attachGlobalHeldCallbackEvent(CoordinatedCallbackFunction func) {
     _gCallbackHeldFunction = func;
 }
 
-void SwitchMatrix::attachGlobalReleaseCallbackEvent(CallbackFunction func) {
+void SwitchMatrix::attachGlobalReleaseCallbackEvent(CoordinatedCallbackFunction func) {
     _gCallbackReleaseFunction = func;
 }
 
