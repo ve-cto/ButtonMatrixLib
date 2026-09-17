@@ -32,6 +32,7 @@
 #include <array>
 
 using CallbackFunction = void (*)();
+using CoordinatedCallbackFunction = void (*)(uint row, uint col);
 
 class SwitchMatrix
 {
@@ -167,9 +168,9 @@ class SwitchMatrix
         std::vector<std::vector<CallbackFunction>> _callbackPressFunctions;
         std::vector<std::vector<CallbackFunction>> _callbackReleaseFunctions;
         std::vector<std::vector<CallbackFunction>> _callbackHeldFunctions;
-        CallbackFunction _gCallbackPressFunction = nullptr;
-        CallbackFunction _gCallbackHeldFunction = nullptr;
-        CallbackFunction _gCallbackReleaseFunction = nullptr;
+        PointeredCallbackFunction _gCallbackPressFunction = nullptr;
+        PointeredCallbackFunction _gCallbackHeldFunction = nullptr;
+        PointeredCallbackFunction _gCallbackReleaseFunction = nullptr;
         bool _enabled = true;
 };
 

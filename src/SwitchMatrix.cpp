@@ -75,11 +75,11 @@ void SwitchMatrix::poll() {
 
                     if (_debounceCounts[i][iter] >= _debounceSamples/2) {
                         if (!_pressedCoordinates[i][iter]) { // Runs once when first triggered.
-                            if (_gCallbackPressFunction != nullptr) {_gCallbackPressFunction();}
+                            if (_gCallbackPressFunction != nullptr) {_gCallbackPressFunction(i, iter);}
                             if (_callbackPressFunctions[i][iter] != nullptr) {_callbackPressFunctions[i][iter]();}    
                         }
                         _pressedCoordinates[i][iter] = true;
-                        if (_gCallbackHeldFunction != nullptr) {_gCallbackHeldFunction();}
+                        if (_gCallbackHeldFunction != nullptr) {_gCallbackHeldFunction(i, iter);}
                         if (_callbackHeldFunctions[i][iter] != nullptr) {_callbackHeldFunctions[i][iter]();} // Held functions get run every loop.
                     }
                 } else {
@@ -89,7 +89,7 @@ void SwitchMatrix::poll() {
 
                     if (_debounceCounts[i][iter] < _debounceSamples/2) {
                         if (_pressedCoordinates[i][iter]) { // Runs once when first triggered.
-                            if (_gCallbackReleaseFunction != nullptr) {_gCallbackReleaseFunction();}
+                            if (_gCallbackReleaseFunction != nullptr) {_gCallbackReleaseFunction(i, iter);}
                             if (_callbackReleaseFunctions[i][iter] != nullptr) {_callbackReleaseFunctions[i][iter]();}    
                         }
                         _pressedCoordinates[i][iter] = false;
@@ -113,12 +113,12 @@ void SwitchMatrix::poll() {
 
                     if (_debounceCounts[iter][i] >= _debounceSamples/2) {
                         if (!_pressedCoordinates[iter][i]) { // Runs once when first triggered.
-                            if (_gCallbackPressFunction != nullptr) {_gCallbackPressFunction();}
+                            if (_gCallbackPressFunction != nullptr) {_gCallbackPressFunction(iter, i);}
                             if (_callbackPressFunctions[iter][i] != nullptr) {_callbackPressFunctions[iter][i]();}    
                         }
 
                         _pressedCoordinates[iter][i] = true;
-                        if (_gCallbackHeldFunction != nullptr) {_gCallbackHeldFunction();}
+                        if (_gCallbackHeldFunction != nullptr) {_gCallbackHeldFunction(iter, i);}
                         if (_callbackHeldFunctions[iter][i] != nullptr) {_callbackHeldFunctions[iter][i]();} // Held functions get run every loop whilst the button is held.
                     }
                 } else {
@@ -128,7 +128,7 @@ void SwitchMatrix::poll() {
 
                     if (_debounceCounts[iter][i] < _debounceSamples/2) {
                         if (_pressedCoordinates[iter][i]) { // Runs once when first triggered.
-                            if (_gCallbackReleaseFunction != nullptr) {_gCallbackReleaseFunction();}
+                            if (_gCallbackReleaseFunction != nullptr) {_gCallbackReleaseFunction(iter, i);}
                             if (_callbackReleaseFunctions[iter][i] != nullptr) {_callbackReleaseFunctions[iter][i]();}    
                         }
                         _pressedCoordinates[iter][i] = false;

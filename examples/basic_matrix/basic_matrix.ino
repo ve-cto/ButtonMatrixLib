@@ -45,16 +45,9 @@ void releaseCallback() {
   Serial.println("Released!");
 }
 
-void globalPressCallback() {
-  std::vector<std::vector<bool>> buttons = matrix.getButtonValues();
-  for (int i = 0; i < buttons.size(); i++) {
-    for (int j = 0; j < buttons[i].size(); j++) {
-      if (buttons[i][j]) {
-        String msg = "Button (" + String(i) + ", " + String(j) + ") is currently pressed!";
-        Serial.println(msg);
-      }
-    }
-  }
+void globalPressCallback(uint row, uint col) {
+  String msg = "Button (" + String(row) + ", " + String(col) + ") got pressed!";
+  Serial.println(msg);
 }
 
 void setup() {
