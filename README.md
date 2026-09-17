@@ -1,4 +1,4 @@
-# ButtonMatrix
+# SwitchMatrix
 Library for interfacing with button/switch diode matrices.
 > This documentation is incomplete, and this library is still in early development.
 
@@ -9,7 +9,7 @@ Matrices are created by defining pins for rows and columns, setting the matrix s
 const u_int rowPins[] = {0, 1, 2, 3};
 const u_int colPins[] = {4, 5, 6, 7};
 
-ButtonMatrix matrix(rowPins, colPins, 4, 4, false, false);
+SwitchMatrix matrix(rowPins, colPins, 4, 4, false, false);
 ```
 Matrices need to be polled every loop (or however often you want it to update).
 ```

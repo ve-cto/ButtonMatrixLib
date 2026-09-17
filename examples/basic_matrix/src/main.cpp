@@ -1,11 +1,11 @@
 #include <Arduino.h>
-#include <ButtonMatrix.h>
+#include <SwitchMatrix.h>
 #include <vector>
 
 const u_int rowPins[] = {0, 1, 2, 3, 4, 5, 6};
 const u_int colPins[] = {7, 8, 9, 10};
 
-ButtonMatrix matrix(rowPins, colPins, 7, 4, false, false);
+SwitchMatrix matrix(rowPins, colPins, 7, 4, false, false);
 
 void pressCallback() {
   Serial.println("Pressed!");

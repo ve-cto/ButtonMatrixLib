@@ -1,5 +1,5 @@
-#ifndef ButtonMatrix_h
-#define ButtonMatrix_h
+#ifndef SwitchMatrix_h
+#define SwitchMatrix_h
 
 #include "Arduino.h"
 #include <vector>
@@ -7,10 +7,10 @@
 
 using CallbackFunction = void (*)();
 
-class ButtonMatrix
+class SwitchMatrix
 {
     public:
-        ButtonMatrix(const u_int rowPins[], const u_int colPins[], u_int rows, u_int cols, bool rowsAreInputs, bool inputsNeedPullups);
+        SwitchMatrix(const u_int rowPins[], const u_int colPins[], u_int rows, u_int cols, bool rowsAreInputs, bool inputsNeedPullups);
         void poll();
         void attachPressCallbackEvent(uint row, uint col, CallbackFunction func);
         void attachHeldCallbackEvent(uint row, uint col, CallbackFunction func);

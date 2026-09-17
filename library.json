@@ -1,5 +1,5 @@
 {
-  "name": "ButtonMatrix",
+  "name": "SwitchMatrix",
   "version": "0.1.0",
   "description": "Library for interfacing with button/switch diode matrices.",
   "keywords": "button, matrix, keypad, esp32",
@@ -13,7 +13,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ve-cto/ButtonMatrix.git"
+    "url": "https://github.com/ve-cto/SwitchMatrixLib.git"
   },
   "frameworks": ["arduino"],
   "platforms": ["espressif32"]
