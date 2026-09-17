@@ -1,6 +1,6 @@
 /*!
- *  @file       ButtonMatrix.cpp
- *  Project     Arduino ButtonMatrix Library
+ *  @file       SwitchMatrix.cpp
+ *  Project     SwitchMatrix Library
  *  @brief      Arduino libary for interfacing with button/switch diode matrices.
  *  @author     ve-cto
  *  @date       17/09/2026
@@ -26,11 +26,11 @@
  */
 
 #include "Arduino.h"
-#include "ButtonMatrix.h"
+#include "SwitchMatrix.h"
 #include <array>
 #include <vector>
 
-ButtonMatrix::ButtonMatrix(const u_int rowPins[], const u_int colPins[], u_int rows, u_int cols, bool rowsAreInputs, bool inputsNeedPullups = false) {
+SwitchMatrix::SwitchMatrix(const u_int rowPins[], const u_int colPins[], u_int rows, u_int cols, bool rowsAreInputs, bool inputsNeedPullups = false) {
     if (rows == 0 || cols == 0) {return;} // TODO: out of range exception
     _rows = rows;
     _cols = cols;
@@ -52,7 +52,7 @@ ButtonMatrix::ButtonMatrix(const u_int rowPins[], const u_int colPins[], u_int r
     }
 }
 
-void ButtonMatrix::poll() {
+void SwitchMatrix::poll() {
     if (!_enabled) {return;}
     const unsigned long now = millis();
     if (now - _lastPoll >= _minPollDtMs) { // Skip
@@ -141,76 +141,76 @@ void ButtonMatrix::poll() {
     }
 }
 
-bool ButtonMatrix::getButtonPressed(uint row, uint col) {
+bool SwitchMatrix::getButtonPressed(uint row, uint col) {
     if (!_enabled) {return false;}
     if (row >= _rows || col >= _cols) {return false;}
     return _pressedCoordinates[row][col];
 }
 
-std::vector<std::vector<bool>> ButtonMatrix::getButtonValues() {
+std::vector<std::vector<bool>> SwitchMatrix::getButtonValues() {
     if (!_enabled) {return {};}
     return _pressedCoordinates;
 }
 
-void ButtonMatrix::attachPressCallbackEvent(uint row, uint col, CallbackFunction func) {
+void SwitchMatrix::attachPressCallbackEvent(uint row, uint col, CallbackFunction func) {
     if (row >= _rows || col >= _cols) {return;}
     _callbackPressFunctions[row][col] = func;
 }
 
-void ButtonMatrix::attachHeldCallbackEvent(uint row, uint col, CallbackFunction func = nullptr) {
+void SwitchMatrix::attachHeldCallbackEvent(uint row, uint col, CallbackFunction func = nullptr) {
     if (row >= _rows || col >= _cols) {return;}
     _callbackHeldFunctions[row][col] = func;
 }
 
-void ButtonMatrix::attachReleaseCallbackEvent(uint row, uint col, CallbackFunction func = nullptr) {
+void SwitchMatrix::attachReleaseCallbackEvent(uint row, uint col, CallbackFunction func = nullptr) {
     if (row >= _rows || col >= _cols) {return;}
     _callbackReleaseFunctions[row][col] = func;
 }
 
-void ButtonMatrix::attachGlobalPressCallbackEvent(CallbackFunction func) {
+void SwitchMatrix::attachGlobalPressCallbackEvent(CallbackFunction func) {
     _gCallbackPressFunction = func;
 }
 
-void ButtonMatrix::attachGlobalHeldCallbackEvent(CallbackFunction func) {
+void SwitchMatrix::attachGlobalHeldCallbackEvent(CallbackFunction func) {
     _gCallbackHeldFunction = func;
 }
 
-void ButtonMatrix::attachGlobalReleaseCallbackEvent(CallbackFunction func) {
+void SwitchMatrix::attachGlobalReleaseCallbackEvent(CallbackFunction func) {
     _gCallbackReleaseFunction = func;
 }
 
-void ButtonMatrix::setEnabled(bool t) {
+void SwitchMatrix::setEnabled(bool t) {
     _enabled = t;
 }
 
-bool ButtonMatrix::getEnabled() {
+bool SwitchMatrix::getEnabled() {
     return _enabled;
 }
 
-void ButtonMatrix::setPoweredSwitchRateUs(uint8_t rate) {
+void SwitchMatrix::setPoweredSwitchRateUs(uint8_t rate) {
     _pollOutputSwitchDelay = rate;
 }
 
-uint8_t ButtonMatrix::getPoweredSwitchRateUs() {
+uint8_t SwitchMatrix::getPoweredSwitchRateUs() {
     return _pollOutputSwitchDelay;
 }
 
-void ButtonMatrix::setDebounceSamples(short count) {
+void SwitchMatrix::setDebounceSamples(short count) {
     _debounceSamples = count;
 }
 
-short ButtonMatrix::getDebounceSamples() {
+short SwitchMatrix::getDebounceSamples() {
     return _debounceSamples;
 }
 
-void ButtonMatrix::setMinPollDtMs(uint ms) {
+void SwitchMatrix::setMinPollDtMs(uint ms) {
     _minPollDtMs = ms;
 }
 
-uint ButtonMatrix::getMinPollDtMs() {
+uint SwitchMatrix::getMinPollDtMs() {
     return _minPollDtMs;
 }
 
-std::array<uint, 2> ButtonMatrix::getSize() {
+std::array<uint, 2> SwitchMatrix::getSize() {
     return { _rows, _cols };
 }

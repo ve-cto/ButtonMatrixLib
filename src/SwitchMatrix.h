@@ -1,6 +1,6 @@
 /*!
- *  @file       ButtonMatrix.h
- *  Project     Arduino ButtonMatrix Library
+ *  @file       SwitchMatrix.h
+ *  Project     SwitchMatrix Library
  *  @brief      Arduino libary for interfacing with button/switch diode matrices.
  *  @author     ve-cto
  *  @date       17/09/2026
@@ -24,8 +24,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef ButtonMatrix_h
-#define ButtonMatrix_h
+#ifndef SwitchMatrix_h
+#define SwitchMatrix_h
 
 #include "Arduino.h"
 #include <vector>
@@ -33,11 +33,11 @@
 
 using CallbackFunction = void (*)();
 
-class ButtonMatrix
+class SwitchMatrix
 {
     public:
         /**
-         * Define a new ButtonMatrix
+         * Define a new SwitchMatrix
          * @param rowPins u_int array of pins connected to matrix rows
          * @param colPins u_int array of pins connected to matrix columns
          * @param rows u_int count of total rows
@@ -45,7 +45,7 @@ class ButtonMatrix
          * @param rowsAreInputs bool boolean of if rows should be treated as input (false -> columns are inputs, rows are outputs)
          * @param inputsNeedPullups bool boolean of if inputs should use built-in pullup resistors (default false)
          */
-        ButtonMatrix(const u_int rowPins[], const u_int colPins[], u_int rows, u_int cols, bool rowsAreInputs, bool inputsNeedPullups);
+        SwitchMatrix(const u_int rowPins[], const u_int colPins[], u_int rows, u_int cols, bool rowsAreInputs, bool inputsNeedPullups);
         /**
          * Iterate through all matrix elements and check for presses.
          * @note Skips if millis() is less than defined _minPollDtMs.
