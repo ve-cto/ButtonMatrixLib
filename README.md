@@ -59,3 +59,7 @@ void loop() {
   matrix.poll();
 }
 ```
+Made for matrices defined in this (or similar) format.
+> In this image rows are outputs and columns are inputs, and the inputs have external pullup resistors attached, so when using this library you would instantiate the ButtonMatrix object as ```ButtonMatrix matrix(rowPins, colPins, 4, 4, false, false);```.
+
+![4x4 diode button matrix with rows as outputs, columns as inputs, and pullup resisistors on the columns.](https://github.com/ve-cto/ButtonMatrixLib/matrix.png "4x4 diode button matrix with rows as outputs, columns as inputs, and pullup resisistors on the columns.")

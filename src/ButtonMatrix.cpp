@@ -1,3 +1,30 @@
+/*!
+ *  @file       ButtonMatrix.cpp
+ *  Project     Arduino ButtonMatrix Library
+ *  @brief      Arduino libary for interfacing with button/switch diode matrices.
+ *  @author     ve-cto
+ *  @date       17/09/2026
+ *  @license    MIT - Copyright (c) 2026 ve-cto
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 #include "Arduino.h"
 #include "ButtonMatrix.h"
 #include <array>
@@ -27,6 +54,12 @@ ButtonMatrix::ButtonMatrix(const u_int rowPins[], const u_int colPins[], u_int r
 
 void ButtonMatrix::poll() {
     if (!_enabled) {return;}
+    const unsigned long now = millis();
+    if (now - _lastPoll >= _minPollDtMs) { // Skip
+        _lastPoll = now;
+    } else {
+        return;
+    }
 
     if (_rowsAreInputs) { // If rows are the inputs, we're driving the columns on and off. Else, the rows are being driven and the columns are inputs.
         for (int iter = 0; iter < _cols; iter++) {
@@ -137,9 +170,11 @@ void ButtonMatrix::attachReleaseCallbackEvent(uint row, uint col, CallbackFuncti
 void ButtonMatrix::attachGlobalPressCallbackEvent(CallbackFunction func) {
     _gCallbackPressFunction = func;
 }
+
 void ButtonMatrix::attachGlobalHeldCallbackEvent(CallbackFunction func) {
     _gCallbackHeldFunction = func;
 }
+
 void ButtonMatrix::attachGlobalReleaseCallbackEvent(CallbackFunction func) {
     _gCallbackReleaseFunction = func;
 }
@@ -150,6 +185,30 @@ void ButtonMatrix::setEnabled(bool t) {
 
 bool ButtonMatrix::getEnabled() {
     return _enabled;
+}
+
+void ButtonMatrix::setPoweredSwitchRateUs(uint8_t rate) {
+    _pollOutputSwitchDelay = rate;
+}
+
+uint8_t ButtonMatrix::getPoweredSwitchRateUs() {
+    return _pollOutputSwitchDelay;
+}
+
+void ButtonMatrix::setDebounceSamples(short count) {
+    _debounceSamples = count;
+}
+
+short ButtonMatrix::getDebounceSamples() {
+    return _debounceSamples;
+}
+
+void ButtonMatrix::setMinPollDtMs(uint ms) {
+    _minPollDtMs = ms;
+}
+
+uint ButtonMatrix::getMinPollDtMs() {
+    return _minPollDtMs;
 }
 
 std::array<uint, 2> ButtonMatrix::getSize() {
