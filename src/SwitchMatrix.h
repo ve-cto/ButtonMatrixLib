@@ -141,9 +141,9 @@ class SwitchMatrix
         void setMinPollDtMs(uint ms);
         /**
          * Get the minimum delay between whole-matrix polls.
-         * @returns Delay in milliseconds
+         * @returns uint Delay in milliseconds
          */
-        void getMinPollDtMs();
+        uint getMinPollDtMs();
         /**
          * Get the size of the matrix.
          * @returns std::array<uint, 2> Array in the format of {rows, columns}.
